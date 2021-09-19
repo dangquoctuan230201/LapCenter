@@ -1,27 +1,19 @@
-import React from 'react';
-import logo from '../../assets/imgs/desktop-computer.png';
-import './navbar.scss';
-
+import React from "react";
+import logo from "../../assets/imgs/desktop-computer.png";
+import "./navbar.scss";
+import {Link} from 'react-router-dom'
 const Navbar = (props) => (
-    <div className='navbar'>
-        <p className='logo-container'>
-            <img className='logo' src={logo}/>
-        </p>
-        <div className='options'>
-            <a className='option'>
-                TRANG CHỦ
-            </a>
-            <a className='option'>
-                GIỚI THIỆU
-            </a>
-            <a className='option'>
-                LIÊN HỆ
-            </a>
-            <a className='option'>
-                PHẢN HỒI
-            </a>
-        </div>
+  <div className="navbar">
+    <p className="logo-container">
+      <img className="logo" src={logo} />
+    </p>
+    <div className="options">
+      <Link  to ='/' className="option" >TRANG CHỦ</Link>
+      <Link  to ='/introduce'  className="option">GIỚI THIỆU</Link>
+      <Link  to ='/contact'  className="option">LIÊN HỆ</Link>
+      <Link   to ='/login' className="option">ĐĂNG NHẬP</Link>
     </div>
-)
+  </div>
+);
 
 export default Navbar;
