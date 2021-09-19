@@ -11,7 +11,7 @@ const Navbar = (props) => (
       <Link  to ='/' className="option" >TRANG CHỦ</Link>
       <Link  to ='/introduce'  className="option">GIỚI THIỆU</Link>
       <Link  to ='/contact'  className="option">LIÊN HỆ</Link>
-      <Link   to ='/login' className="option">Đăng Nhập</Link>
+      <Link   to ='/login' className="option">ĐĂNG NHẬP</Link>
     </div>
   </div>
 );

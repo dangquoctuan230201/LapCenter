@@ -27,7 +27,7 @@ const Login =() =>{
 
     const onLogin = () => {
         console.log(username, password);
-        if(username === accont.username && password === accont.password){
+        if(username === accont.username  && password === accont.password){
             console.log('dang nhap thanh cong')
             history.push('/');
         }else{

@@ -6,7 +6,7 @@ const Card = (props) => {
   const item = props.product;
   return (
     <div className="card-container" onClick={() => {}}>
-      <img className="image" src={item.image} />
+      <img className="image" src={item.images[0]} />
       <h4 className="name">{item.name}</h4>
       <p className="email d-flex">
         Hãng:{" "}
@@ -14,7 +14,7 @@ const Card = (props) => {
       </p>
       <p className="email d-flex">
         Chip xử lý:{" "}
-        <span className="ml-1 text-success font-weight-bold">{item.chip}</span>
+        <span className="ml-1 text-success font-weight-bold">{item.cpu}</span>
       </p>
       <p className="email d-flex">
         Price:{" "}
