@@ -4,6 +4,7 @@ import { Input, Button } from 'semantic-ui-react';
 import './login.scss';
 import {useHistory}from 'react-router-dom';
 import Register from "../register/register";
+const axios = require("axios");
 
 const accont = {
     username:'admin',
@@ -24,16 +25,37 @@ const Login =() =>{
             setPassword(e.target.value)
         }
     }
-
+    axios.post('/user', {
+      firstName: 'Fred',
+      lastName: 'Flintstone'
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
     const onLogin = () => {
-        console.log(username, password);
-        if(username === accont.username  && password === accont.password){
-            console.log('dang nhap thanh cong')
-            history.push('/');
-        }else{
-            console.log('dang nhap that bai')
-            alert('may nhap sai username or password roi!')
-        }
+        // console.log(username, password);
+        // if(username === accont.username  && password === accont.password){
+        //     console.log('dang nhap thanh cong')
+        //     history.push('/');
+        // }else{
+        //     console.log('dang nhap that bai')
+        //     alert('may nhap sai username or password roi!')
+        // }
+        axios.post('https://lap-center.herokuapp.com/api/login', {
+          username: username,
+          password: password
+        })
+        .then(function (response) {
+          console.log(response);
+          history.push('/');
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert('may nhap sai username or password roi!')
+        });
     }
 
     return (
