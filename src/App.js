@@ -7,6 +7,7 @@ import About from './pages/introduce/introduce';
 import Login from './pages/login/login';
 import NotFoundPage from './pages/notFound/notfound';
 import Register from './pages/register/register';
+import ProductDetail from './pages/productDetail/productDetail';
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +17,8 @@ function App() {
         <Route path='/contact' exact component = {Contact}/>
         <Route path='/login' exact component = {Login}/>
         <Route path='/register' exact component = {Register}/>
+        <Route path='/productDetail' exact component = {ProductDetail}/>
+
 
         <Route component = {NotFoundPage}/>
       </Switch>
