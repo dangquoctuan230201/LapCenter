@@ -1,11 +1,17 @@
 import React from "react";
+// import { useHistory } from "react-router";
 import { Button, Icon } from "semantic-ui-react";
 import "./card.scss";
+import { useHistory } from "react-router-dom";
 
 const Card = (props) => {
+  const history = useHistory();
   const item = props.product;
+  const moveToDetail = () =>{
+    history.push('/productDetail')
+  }
   return (
-    <div className="card-container" onClick={() => {}}>
+    <div className="card-container" onClick={moveToDetail}>
       <img className="image" src={item.images[0]} />
       <h4 className="name">{item.name}</h4>
       <p className="email d-flex">
@@ -25,7 +31,7 @@ const Card = (props) => {
       {/* <button onClick={() => { }} className="btn-success">
             Mua ngay
           </button> */}
-      <Button onClick={() => {}} color="green">
+      <Button onClick={moveToDetail} color="green">
         <Icon name="eye" /> Xem sản phẩm
       </Button>
     </div>
