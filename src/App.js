@@ -17,7 +17,7 @@ function App() {
         <Route path='/contact' exact component = {Contact}/>
         <Route path='/login' exact component = {Login}/>
         <Route path='/register' exact component = {Register}/>
-        <Route path='/productDetail' exact component = {ProductDetail}/>
+        <Route path='/product/:id' exact component = {ProductDetail}/>
 
 
         <Route component = {NotFoundPage}/>
