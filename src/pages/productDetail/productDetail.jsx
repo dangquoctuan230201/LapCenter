@@ -2,7 +2,7 @@ import React, { useEffect,useState } from "react";
 import Navbar from "../../components/navbar/navbar";
 import { Segment, Button, Table } from "semantic-ui-react";
 import "./productDetail.scss";
-import { useLocation } from "react-router-dom";
+import { useLocation,useHistory } from "react-router-dom";
 import axios from 'axios'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -32,6 +32,11 @@ const ProductDetail = () => {
   const [image, setImage] = useState('');
   const [loading, setLoading] = useState(true);
   const [sameProduct, setSameProduct] = useState([]);
+  const history = useHistory();
+
+  const moveToBuy = () => {
+    history.push(`/buy/${id}`)
+  }
   
 
   const location = useLocation();
@@ -110,7 +115,7 @@ const ProductDetail = () => {
               <div className="discount-content">something</div>
             </div>
             <div className="detail-buy">
-              <Button color="red">MUA NGAY</Button>
+              <Button color="red" onClick={moveToBuy}>MUA NGAY</Button>
               <p>
                 GỌI NGAY <a href="tel:+84969442510"> 0969 44 2510 </a> ĐỂ GIỮ
                 HÀNG
@@ -189,6 +194,7 @@ const ProductDetail = () => {
       </Segment> 
       
     </div>
+    
   );
 };
 
