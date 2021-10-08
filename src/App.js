@@ -8,6 +8,8 @@ import Login from './pages/login/login';
 import NotFoundPage from './pages/notFound/notfound';
 import Register from './pages/register/register';
 import ProductDetail from './pages/productDetail/productDetail';
+import Footer from './components/footer/footer';
+import Buy from './pages/buy/buy';
 function App() {
   return (
     <BrowserRouter>
@@ -18,7 +20,11 @@ function App() {
         <Route path='/login' exact component = {Login}/>
         <Route path='/register' exact component = {Register}/>
         <Route path='/product/:id' exact component = {ProductDetail}/>
+        <Route path='/footer' exact component = {Footer}/>
+        <Route path='/buy/:id' exact component = {Buy}/>
 
+        
+        
 
         <Route component = {NotFoundPage}/>
       </Switch>
