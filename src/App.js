@@ -10,6 +10,7 @@ import Register from './pages/register/register';
 import ProductDetail from './pages/productDetail/productDetail';
 import Footer from './components/footer/footer';
 import Buy from './pages/buy/buy';
+import History from './pages/history/history';
 function App() {
   return (
     <BrowserRouter>
@@ -22,7 +23,7 @@ function App() {
         <Route path='/product/:id' exact component = {ProductDetail}/>
         <Route path='/footer' exact component = {Footer}/>
         <Route path='/buy/:id' exact component = {Buy}/>
-
+        <Route path='/history/:userId' exact component = {History}/>
         
         
 

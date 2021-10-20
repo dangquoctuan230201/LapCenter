@@ -5,7 +5,9 @@ import Navbar from "../../components/navbar/navbar";
 import Card from "../../components/card/card";
 import Footer from "../../components/footer/footer";
 import product from "../../assets/data/product";
-const axios = require("axios");
+import HistoryAndCart from "../../components/historyAndCard/historyAndCard";
+// const axios = require("axios");
+import axios from "axios";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -15,6 +17,8 @@ function Home() {
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPages, setTotalPage] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  const currentUser = localStorage.getItem('customerName');
 
   const fetchData = async (url) => {
     // await setData(product);
@@ -42,6 +46,7 @@ function Home() {
       });
    
   };
+  
   
   useEffect(async () => {
     let url = `https://lap-center.herokuapp.com/api/product`;
@@ -133,7 +138,10 @@ function Home() {
             <option value="desc">Từ cao đến thấp</option>
           </select>
         </div>
+        
       </div>
+      <div className="currentUser">{currentUser && <p>Chào mừng, <span> {currentUser} </span></p>}</div>
+        {currentUser && <HistoryAndCart/>}
       <div className="container-body">
         <div className="menuLeft">
         </div>
