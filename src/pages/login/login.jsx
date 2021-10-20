@@ -1,6 +1,6 @@
 import React,{useState} from "react";
-import Navbar from "../../components/navbar/navbar";
-import { Input, Button } from 'semantic-ui-react';
+
+import { Input, Button, Icon,Dimmer,Loader } from 'semantic-ui-react';
 import './login.scss';
 import {useHistory}from 'react-router-dom';
 import Register from "../register/register";
@@ -13,6 +13,7 @@ const accont = {
 const Login =() =>{
     const [username, setUsername]=useState('');
     const [password, setPassword]=useState('');
+    const [loading, setLoading] = useState(false);
     
 
     const history = useHistory('');
@@ -36,31 +37,45 @@ const Login =() =>{
       console.log(error);
     });
     const onLogin = () => {
-        // console.log(username, password);
-        // if(username === accont.username  && password === accont.password){
-        //     console.log('dang nhap thanh cong')
-        //     history.push('/');
-        // }else{
-        //     console.log('dang nhap that bai')
-        //     alert('may nhap sai username or password roi!')
-        // }
-        axios.post('https://lap-center.herokuapp.com/api/login', {
-          username: username,
-          password: password
-        })
-        .then(function (response) {
-          console.log(response);
-          history.push('/');
-        })
-        .catch(function (error) {
-          console.log(error);
-          alert('may nhap sai username or password roi!')
-        });
+     
+        console.log(username, password);
+        if(username === accont.username  && password === accont.password){
+          setLoading(true);
+          axios.post('https://lap-center.herokuapp.com/api/login', {
+            username: username,
+            password: password
+          })
+          .then(function (response) {
+            setLoading(false);
+            console.log(response);
+            history.push('/');
+            
+          })
+          .catch(function (error) {
+            setLoading(false);
+            console.log(error);
+            alert('may nhap sai username or password roi!')
+            
+          });
+        }else{
+            console.log('dang nhap that bai')
+            alert('may nhap sai username or password roi!')
+        }
+        
     }
+    let checkInfo = true;
+      if (!username ||password ) checkInfo = true ; 
+      else checkInfo = false;
 
     return (
         <div>
-        <Navbar />
+          <Dimmer active={loading} inverted>
+        <Loader inverted>Loading</Loader>
+      </Dimmer>
+        <Icon
+        className='icon-home' name="home" size="large" inverted circular link
+        onClick={() => history.push("/")}
+      />
         
         <div className="login-container">
           <div className="login-form">
@@ -68,13 +83,17 @@ const Login =() =>{
             <div className="login-content">
               <label>Tên đăng nhập</label>
               <br />
-              <Input placeholder="Username" className="inputText" value={username} onChange={(e) => handleChange(e, 'username')} />
+              <Input 
+              placeholder="Username" 
+              className="inputText" 
+              value={username} 
+              onChange={(e) => handleChange(e, 'username')} />
               <br />
               <label style={{ marginTop: "10px" }}>Mật khẩu</label>
               <br />
               <Input placeholder="Password" type="password" value={password} className="inputText" onChange={(e) => handleChange(e, 'password')} />
             <br />
-            <Button color="green" onClick={onLogin} > Đăng nhập </Button>
+            <Button primary onClick={onLogin} > Đăng nhập </Button>
             <p style={{ marginTop: "20px", textAlign: "center" }}>
               Bạn chưa có tài khoản?{" "}
               <a className="register-text" href="/register">
