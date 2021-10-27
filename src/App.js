@@ -11,6 +11,8 @@ import ProductDetail from './pages/productDetail/productDetail';
 import Footer from './components/footer/footer';
 import Buy from './pages/buy/buy';
 import History from './pages/history/history';
+import Cart from './pages/cart/cart';
+import ManageOrder from './pages/admin/order/manageOrder';
 function App() {
   return (
     <BrowserRouter>
@@ -24,7 +26,9 @@ function App() {
         <Route path='/footer' exact component = {Footer}/>
         <Route path='/buy/:id' exact component = {Buy}/>
         <Route path='/history/:userId' exact component = {History}/>
-        
+        <Route path='/cart/:cartId' exact component = {Cart}/>
+        <Route path='/admin/order' exact component = {ManageOrder}/>
+
         
 
         <Route component = {NotFoundPage}/>
