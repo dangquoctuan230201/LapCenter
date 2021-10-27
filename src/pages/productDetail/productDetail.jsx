@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from "react";
 import Navbar from "../../components/navbar/navbar";
-import { Segment, Button, Table } from "semantic-ui-react";
+import { Segment, Button, Table,Modal } from "semantic-ui-react";
 import "./productDetail.scss";
 import { useLocation,useHistory } from "react-router-dom";
 import axios from 'axios'
@@ -33,6 +33,9 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [sameProduct, setSameProduct] = useState([]);
   const history = useHistory();
+  const [openDialog, setOpenDialog] = useState(false);
+  const [message, setMessage] = useState('');
+  const currentUser = localStorage.getItem('customerName');
 
   const moveToBuy = () => {
     history.push(`/buy/${id}`)
@@ -81,6 +84,32 @@ const ProductDetail = () => {
         setLoading(false);
       })
   }
+  const onAddToCart = () => {
+    // setOpen(false);
+    setLoading(true);
+    axios.post('https://lap-center.herokuapp.com/api/cart/addProductToCart', {
+      userId : localStorage.getItem("userId"),
+      productId : data._id,
+      productName: data.name,
+      productBrand: data.brand,
+      image: image,
+     price: data.price
+    
+    })
+    .then(function (res) {
+      console.log(res);
+      setLoading(false);
+      setOpenDialog(true);
+      setMessage('them sp thanh cong');
+      
+    })
+    .catch(function (err) {
+      console.log(err);
+      setLoading(false);
+      setOpenDialog(true);
+      setMessage('them sp that bai');
+    });
+  }
   return (
     <div>
       <Navbar />
@@ -112,10 +141,13 @@ const ProductDetail = () => {
               <div className="discount-top">
                 <p>Khuyến mãi - Quà tặng</p>
               </div>
-              <div className="discount-content">something</div>
+              <div className="discount-content">Khuyến mãi chưa mở</div>
             </div>
             <div className="detail-buy">
               <Button color="red" onClick={moveToBuy}>MUA NGAY</Button>
+              {currentUser&&
+              <Button color="green" className="btnCart" onClick={onAddToCart}>Thêm vào giỏ hàng</Button>
+              }
               <p>
                 GỌI NGAY <a href="tel:+84969442510"> 0969 44 2510 </a> ĐỂ GIỮ
                 HÀNG
@@ -192,6 +224,22 @@ const ProductDetail = () => {
         </div>
 
       </Segment> 
+      <Modal
+        onClose={() => setOpenDialog(false)}
+        onOpen={() => setOpenDialog(true)}
+        open={openDialog}
+        size="mini"
+      >
+        <Modal.Header>
+          <h4 className="txt-check">Thông báo</h4>
+        </Modal.Header>
+        <Modal.Content image>
+          <p>{message}</p>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button onClick={() => setOpenDialog(false)}>Đóng</Button>
+        </Modal.Actions>
+      </Modal>
       
     </div>
     
