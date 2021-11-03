@@ -6,6 +6,8 @@ import { useHistory } from "react-router-dom";
 
 const Navbar = (props) => {
   const history = useHistory();
+  const isAdmin = localStorage.getItem("isAdmin")
+
   const currentUser = localStorage.getItem('customerName');
 
   const backToHome = () => {
@@ -30,13 +32,19 @@ const Navbar = (props) => {
           LIÊN HỆ
         </Link>
         {currentUser ?
-        <Link className="option" to="/login" onClick = {()=> localStorage.clear()}>
-          ĐĂNG XUẤT
-        </Link> :
-        <Link className="option" to="/login">
-        ĐĂNG NHẬP
-      </Link>
+          <Link className="option" to="/login" onClick = {()=> localStorage.clear()}>
+            ĐĂNG XUẤT
+          </Link> :
+          <Link className="option" to="/login">
+            ĐĂNG NHẬP
+          </Link>
         }
+      {isAdmin === "true" &&
+        <Link className="option" to="/admin/order">
+          QUẢN LÝ ĐƠN HÀNG
+        </Link>
+      }
+        
       </div>
     </div>
   );
